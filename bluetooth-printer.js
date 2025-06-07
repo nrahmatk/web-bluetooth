@@ -35,13 +35,13 @@ class BluetoothPrinter {
       this.log("Web Bluetooth API tidak didukung di browser ini", "error");
       return false;
     }
-    
+
     // Check HTTPS requirement
-    if (location.protocol !== 'https:' && location.hostname !== 'localhost') {
+    if (location.protocol !== "https:" && location.hostname !== "localhost") {
       this.log("Web Bluetooth membutuhkan HTTPS atau localhost", "error");
       return false;
     }
-    
+
     return true;
   }
 
@@ -95,17 +95,21 @@ class BluetoothPrinter {
         this.device = await navigator.bluetooth.requestDevice(options);
       } catch (filterError) {
         this.log("Filter spesifik gagal, mencoba scan semua perangkat...");
-        
+
         // Fallback: scan semua perangkat yang mengiklankan service
         options = {
           acceptAllDevices: true,
           optionalServices: this.alternativeServiceUUIDs,
         };
-        
+
         this.device = await navigator.bluetooth.requestDevice(options);
       }
 
-      this.log(`Perangkat ditemukan: ${this.device.name || "Unknown"} (ID: ${this.device.id})`);
+      this.log(
+        `Perangkat ditemukan: ${this.device.name || "Unknown"} (ID: ${
+          this.device.id
+        })`
+      );
 
       // Add disconnect event listener
       this.device.addEventListener("gattserverdisconnected", () => {
@@ -340,9 +344,9 @@ class BluetoothPrinter {
       hostname: location.hostname,
       bluetoothSupported: !!navigator.bluetooth,
       isSecureContext: window.isSecureContext,
-      platform: navigator.platform || 'Unknown'
+      platform: navigator.platform || "Unknown",
     };
-    
+
     this.log(`System Info: ${JSON.stringify(info, null, 2)}`);
     return info;
   }
@@ -354,7 +358,7 @@ class BluetoothPrinter {
     try {
       // Log system information
       this.getSystemInfo();
-      
+
       if (!this.isBluetoothSupported()) {
         throw new Error("Web Bluetooth tidak didukung atau tidak aman");
       }
@@ -377,7 +381,7 @@ class BluetoothPrinter {
       } catch (filterError) {
         this.log(`Filter RPP02 gagal: ${filterError.message}`);
         this.log("Mencoba filter umum untuk printer...");
-        
+
         // Fallback ke filter umum
         options = {
           filters: [
@@ -389,24 +393,28 @@ class BluetoothPrinter {
           ],
           optionalServices: this.alternativeServiceUUIDs,
         };
-        
+
         try {
           this.device = await navigator.bluetooth.requestDevice(options);
         } catch (generalError) {
           this.log(`Filter umum gagal: ${generalError.message}`);
           this.log("Mencoba scan semua perangkat...");
-          
+
           // Last resort: scan all devices
           options = {
             acceptAllDevices: true,
             optionalServices: this.alternativeServiceUUIDs,
           };
-          
+
           this.device = await navigator.bluetooth.requestDevice(options);
         }
       }
 
-      this.log(`Perangkat ditemukan: ${this.device.name || "Unknown"} (ID: ${this.device.id})`);
+      this.log(
+        `Perangkat ditemukan: ${this.device.name || "Unknown"} (ID: ${
+          this.device.id
+        })`
+      );
 
       // Add disconnect event listener
       this.device.addEventListener("gattserverdisconnected", () => {

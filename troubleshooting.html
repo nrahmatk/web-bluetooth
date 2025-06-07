@@ -1,149 +1,202 @@
 <!DOCTYPE html>
 <html lang="id">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Troubleshooting - Bluetooth Printer</title>
-    <link rel="stylesheet" href="style.css">
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
-</head>
-<body>
+    <link rel="stylesheet" href="style.css" />
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
     <div class="container">
-        <header>
-            <h1><i class="fas fa-tools"></i> Troubleshooting Guide</h1>
-            <p>Panduan mengatasi masalah koneksi Bluetooth Printer</p>
-        </header>
+      <header>
+        <h1><i class="fas fa-tools"></i> Troubleshooting Guide</h1>
+        <p>Panduan mengatasi masalah koneksi Bluetooth Printer</p>
+      </header>
 
-        <div style="padding: 30px;">
-            <h2><i class="fas fa-wifi"></i> Masalah HTTPS</h2>
-            <div class="alert alert-warning">
-                <h3>Web Bluetooth API membutuhkan HTTPS!</h3>
-                <p>Browser modern mengharuskan website menggunakan HTTPS untuk mengakses Web Bluetooth API demi keamanan.</p>
-                
-                <h4>Solusi:</h4>
-                <ol>
-                    <li><strong>Gunakan HTTPS:</strong> Host website di server yang mendukung HTTPS (SSL/TLS)</li>
-                    <li><strong>Localhost:</strong> Jalankan di localhost atau 127.0.0.1 (tidak memerlukan HTTPS)</li>
-                    <li><strong>Development Server:</strong> Gunakan tools seperti Live Server dengan HTTPS enable</li>
-                </ol>
-            </div>
+      <div style="padding: 30px">
+        <h2><i class="fas fa-wifi"></i> Masalah HTTPS</h2>
+        <div class="alert alert-warning">
+          <h3>Web Bluetooth API membutuhkan HTTPS!</h3>
+          <p>
+            Browser modern mengharuskan website menggunakan HTTPS untuk
+            mengakses Web Bluetooth API demi keamanan.
+          </p>
 
-            <h2><i class="fas fa-bluetooth"></i> Printer RPP02 Tidak Terdeteksi</h2>
-            <div class="alert alert-info">
-                <h3>Langkah troubleshooting:</h3>
-                <ol>
-                    <li><strong>Pastikan pairing:</strong> RPP02 sudah paired di pengaturan Bluetooth Android</li>
-                    <li><strong>Mode discoverable:</strong> Aktifkan mode discoverable pada printer</li>
-                    <li><strong>Jarak:</strong> Pastikan jarak dekat (< 5 meter) dari printer</li>
-                    <li><strong>Battery:</strong> Pastikan printer memiliki daya yang cukup</li>
-                    <li><strong>Browser support:</strong> Gunakan Chrome/Edge versi terbaru</li>
-                </ol>
-            </div>
-
-            <h2><i class="fas fa-cog"></i> Cara Mengaktifkan Mode Discoverable RPP02</h2>
-            <div class="alert alert-success">
-                <h3>Untuk printer RPP02:</h3>
-                <ol>
-                    <li>Tekan dan tahan tombol <strong>Power + Feed</strong> bersamaan</li>
-                    <li>Tunggu hingga LED berkedip biru atau indikator Bluetooth aktif</li>
-                    <li>Printer sekarang dalam mode discoverable</li>
-                    <li>Coba koneksi kembali dari aplikasi web</li>
-                </ol>
-            </div>
-
-            <h2><i class="fas fa-bug"></i> Mode Debug</h2>
-            <div class="alert alert-primary">
-                <p>Gunakan tombol <strong>"Debug Connect (RPP02)"</strong> pada halaman utama untuk:</p>
-                <ul>
-                    <li>Melihat informasi sistem detil</li>
-                    <li>Menguji berbagai filter pencarian perangkat</li>
-                    <li>Log detil proses koneksi</li>
-                    <li>Identifikasi masalah spesifik</li>
-                </ul>
-            </div>
-
-            <h2><i class="fas fa-globe"></i> Browser yang Didukung</h2>
-            <table style="width: 100%; border-collapse: collapse; margin-top: 15px;">
-                <tr style="background: #f8f9fa; border: 1px solid #dee2e6;">
-                    <th style="padding: 10px; text-align: left; border: 1px solid #dee2e6;">Browser</th>
-                    <th style="padding: 10px; text-align: left; border: 1px solid #dee2e6;">Support</th>
-                    <th style="padding: 10px; text-align: left; border: 1px solid #dee2e6;">Minimum Version</th>
-                </tr>
-                <tr style="border: 1px solid #dee2e6;">
-                    <td style="padding: 10px; border: 1px solid #dee2e6;">Chrome</td>
-                    <td style="padding: 10px; border: 1px solid #dee2e6;">✅ Ya</td>
-                    <td style="padding: 10px; border: 1px solid #dee2e6;">56+</td>
-                </tr>
-                <tr style="border: 1px solid #dee2e6;">
-                    <td style="padding: 10px; border: 1px solid #dee2e6;">Edge</td>
-                    <td style="padding: 10px; border: 1px solid #dee2e6;">✅ Ya</td>
-                    <td style="padding: 10px; border: 1px solid #dee2e6;">79+</td>
-                </tr>
-                <tr style="border: 1px solid #dee2e6;">
-                    <td style="padding: 10px; border: 1px solid #dee2e6;">Firefox</td>
-                    <td style="padding: 10px; border: 1px solid #dee2e6;">❌ Tidak</td>
-                    <td style="padding: 10px; border: 1px solid #dee2e6;">-</td>
-                </tr>
-                <tr style="border: 1px solid #dee2e6;">
-                    <td style="padding: 10px; border: 1px solid #dee2e6;">Safari</td>
-                    <td style="padding: 10px; border: 1px solid #dee2e6;">❌ Tidak</td>
-                    <td style="padding: 10px; border: 1px solid #dee2e6;">-</td>
-                </tr>
-            </table>
-
-            <div style="margin-top: 30px; text-align: center;">
-                <a href="index.html" class="btn btn-primary">
-                    <i class="fas fa-arrow-left"></i> Kembali ke Aplikasi
-                </a>
-            </div>
+          <h4>Solusi:</h4>
+          <ol>
+            <li>
+              <strong>Gunakan HTTPS:</strong> Host website di server yang
+              mendukung HTTPS (SSL/TLS)
+            </li>
+            <li>
+              <strong>Localhost:</strong> Jalankan di localhost atau 127.0.0.1
+              (tidak memerlukan HTTPS)
+            </li>
+            <li>
+              <strong>Development Server:</strong> Gunakan tools seperti Live
+              Server dengan HTTPS enable
+            </li>
+          </ol>
         </div>
+
+        <h2><i class="fas fa-bluetooth"></i> Printer RPP02 Tidak Terdeteksi</h2>
+        <div class="alert alert-info">
+          <h3>Langkah troubleshooting:</h3>
+          <ol>
+            <li>
+              <strong>Pastikan pairing:</strong> RPP02 sudah paired di
+              pengaturan Bluetooth Android
+            </li>
+            <li>
+              <strong>Mode discoverable:</strong> Aktifkan mode discoverable
+              pada printer
+            </li>
+            <li>
+              <strong>Jarak:</strong> Pastikan jarak dekat (< 5 meter) dari
+              printer
+            </li>
+            <li>
+              <strong>Battery:</strong> Pastikan printer memiliki daya yang
+              cukup
+            </li>
+            <li>
+              <strong>Browser support:</strong> Gunakan Chrome/Edge versi
+              terbaru
+            </li>
+          </ol>
+        </div>
+
+        <h2>
+          <i class="fas fa-cog"></i> Cara Mengaktifkan Mode Discoverable RPP02
+        </h2>
+        <div class="alert alert-success">
+          <h3>Untuk printer RPP02:</h3>
+          <ol>
+            <li>
+              Tekan dan tahan tombol <strong>Power + Feed</strong> bersamaan
+            </li>
+            <li>
+              Tunggu hingga LED berkedip biru atau indikator Bluetooth aktif
+            </li>
+            <li>Printer sekarang dalam mode discoverable</li>
+            <li>Coba koneksi kembali dari aplikasi web</li>
+          </ol>
+        </div>
+
+        <h2><i class="fas fa-bug"></i> Mode Debug</h2>
+        <div class="alert alert-primary">
+          <p>
+            Gunakan tombol <strong>"Debug Connect (RPP02)"</strong> pada halaman
+            utama untuk:
+          </p>
+          <ul>
+            <li>Melihat informasi sistem detil</li>
+            <li>Menguji berbagai filter pencarian perangkat</li>
+            <li>Log detil proses koneksi</li>
+            <li>Identifikasi masalah spesifik</li>
+          </ul>
+        </div>
+
+        <h2><i class="fas fa-globe"></i> Browser yang Didukung</h2>
+        <table style="width: 100%; border-collapse: collapse; margin-top: 15px">
+          <tr style="background: #f8f9fa; border: 1px solid #dee2e6">
+            <th
+              style="padding: 10px; text-align: left; border: 1px solid #dee2e6"
+            >
+              Browser
+            </th>
+            <th
+              style="padding: 10px; text-align: left; border: 1px solid #dee2e6"
+            >
+              Support
+            </th>
+            <th
+              style="padding: 10px; text-align: left; border: 1px solid #dee2e6"
+            >
+              Minimum Version
+            </th>
+          </tr>
+          <tr style="border: 1px solid #dee2e6">
+            <td style="padding: 10px; border: 1px solid #dee2e6">Chrome</td>
+            <td style="padding: 10px; border: 1px solid #dee2e6">✅ Ya</td>
+            <td style="padding: 10px; border: 1px solid #dee2e6">56+</td>
+          </tr>
+          <tr style="border: 1px solid #dee2e6">
+            <td style="padding: 10px; border: 1px solid #dee2e6">Edge</td>
+            <td style="padding: 10px; border: 1px solid #dee2e6">✅ Ya</td>
+            <td style="padding: 10px; border: 1px solid #dee2e6">79+</td>
+          </tr>
+          <tr style="border: 1px solid #dee2e6">
+            <td style="padding: 10px; border: 1px solid #dee2e6">Firefox</td>
+            <td style="padding: 10px; border: 1px solid #dee2e6">❌ Tidak</td>
+            <td style="padding: 10px; border: 1px solid #dee2e6">-</td>
+          </tr>
+          <tr style="border: 1px solid #dee2e6">
+            <td style="padding: 10px; border: 1px solid #dee2e6">Safari</td>
+            <td style="padding: 10px; border: 1px solid #dee2e6">❌ Tidak</td>
+            <td style="padding: 10px; border: 1px solid #dee2e6">-</td>
+          </tr>
+        </table>
+
+        <div style="margin-top: 30px; text-align: center">
+          <a href="index.html" class="btn btn-primary">
+            <i class="fas fa-arrow-left"></i> Kembali ke Aplikasi
+          </a>
+        </div>
+      </div>
     </div>
 
     <style>
-        .alert {
-            padding: 15px;
-            margin: 15px 0;
-            border-radius: 8px;
-            border-left: 4px solid;
-        }
-        
-        .alert-warning {
-            background-color: #fff3cd;
-            border-color: #ffc107;
-            color: #856404;
-        }
-        
-        .alert-info {
-            background-color: #d1ecf1;
-            border-color: #17a2b8;
-            color: #0c5460;
-        }
-        
-        .alert-success {
-            background-color: #d4edda;
-            border-color: #28a745;
-            color: #155724;
-        }
-        
-        .alert-primary {
-            background-color: #d1ecf1;
-            border-color: #007bff;
-            color: #004085;
-        }
-        
-        .alert h3, .alert h4 {
-            margin-top: 0;
-            margin-bottom: 10px;
-        }
-        
-        .alert ol, .alert ul {
-            margin-bottom: 10px;
-            padding-left: 20px;
-        }
-        
-        .alert li {
-            margin-bottom: 5px;
-        }
+      .alert {
+        padding: 15px;
+        margin: 15px 0;
+        border-radius: 8px;
+        border-left: 4px solid;
+      }
+
+      .alert-warning {
+        background-color: #fff3cd;
+        border-color: #ffc107;
+        color: #856404;
+      }
+
+      .alert-info {
+        background-color: #d1ecf1;
+        border-color: #17a2b8;
+        color: #0c5460;
+      }
+
+      .alert-success {
+        background-color: #d4edda;
+        border-color: #28a745;
+        color: #155724;
+      }
+
+      .alert-primary {
+        background-color: #d1ecf1;
+        border-color: #007bff;
+        color: #004085;
+      }
+
+      .alert h3,
+      .alert h4 {
+        margin-top: 0;
+        margin-bottom: 10px;
+      }
+
+      .alert ol,
+      .alert ul {
+        margin-bottom: 10px;
+        padding-left: 20px;
+      }
+
+      .alert li {
+        margin-bottom: 5px;
+      }
     </style>
-</body>
+  </body>
 </html>

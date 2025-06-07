@@ -575,19 +575,29 @@ function initialize() {
  */
 async function debugConnection() {
   if (printer.isConnected) {
-    log("Printer sudah terhubung. Disconnect terlebih dahulu untuk debug.", "warning");
+    log(
+      "Printer sudah terhubung. Disconnect terlebih dahulu untuk debug.",
+      "warning"
+    );
     return;
   }
 
   log("=== DEBUG CONNECTION START ===", "info");
-  
+
   // Show system information
   log("Mengecek informasi sistem...", "info");
   const systemInfo = printer.getSystemInfo();
-  
+
   // Check HTTPS requirement
-  if (location.protocol !== 'https:' && location.hostname !== 'localhost' && location.hostname !== '127.0.0.1') {
-    log("⚠️ PERINGATAN: Web Bluetooth membutuhkan HTTPS atau localhost!", "error");
+  if (
+    location.protocol !== "https:" &&
+    location.hostname !== "localhost" &&
+    location.hostname !== "127.0.0.1"
+  ) {
+    log(
+      "⚠️ PERINGATAN: Web Bluetooth membutuhkan HTTPS atau localhost!",
+      "error"
+    );
     log(`Protocol saat ini: ${location.protocol}`, "error");
     log("Solusi: Gunakan HTTPS atau buka dari localhost", "error");
   } else {
@@ -595,10 +605,10 @@ async function debugConnection() {
   }
 
   showLoading(connectDebugBtn);
-  
+
   try {
     const connected = await printer.connectWithDebug();
-    
+
     if (connected) {
       showMessage("Debug: Berhasil terhubung ke printer!", "success");
       log("=== DEBUG CONNECTION SUCCESS ===", "success");
@@ -611,6 +621,6 @@ async function debugConnection() {
     showMessage(`Debug Error: ${error.message}`, "error");
     log("=== DEBUG CONNECTION ERROR ===", "error");
   }
-  
+
   hideLoading(connectDebugBtn);
 }
