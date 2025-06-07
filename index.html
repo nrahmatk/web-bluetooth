@@ -1,153 +1,226 @@
 <!DOCTYPE html>
 <html lang="id">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">    <title>Thermal Printer Bluetooth - EPSON EP5821</title>
-    <link rel="stylesheet" href="style.css">
-    <link rel="manifest" href="manifest.json">
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
-    <meta name="theme-color" content="#667eea">
-    <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-status-bar-style" content="default">
-    <meta name="apple-mobile-web-app-title" content="Thermal Printer">
-</head>
-<body>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Thermal Printer Bluetooth - EPSON EP5821</title>
+    <link rel="stylesheet" href="style.css" />
+    <link rel="manifest" href="manifest.json" />
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+      rel="stylesheet"
+    />
+    <meta name="theme-color" content="#667eea" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+    <meta name="apple-mobile-web-app-title" content="Thermal Printer" />
+  </head>
+  <body>
     <div class="container">
-        <header>
-            <h1><i class="fas fa-print"></i> Thermal Printer Bluetooth</h1>
-            <p>EPSON EP5821 - 58mm</p>
-        </header>
+      <header>
+        <h1><i class="fas fa-print"></i> Thermal Printer Bluetooth</h1>
+        <p>EPSON EP5821 - 58mm</p>
+      </header>      <div class="connection-section">
+        <button id="connectBtn" class="btn btn-primary">
+          <i class="fas fa-bluetooth"></i> Hubungkan Printer
+        </button>
+        <button id="connectDebugBtn" class="btn btn-secondary">
+          <i class="fas fa-bug"></i> Debug Connect (RPP02)
+        </button>
+        <div style="margin-top: 10px;">
+          <a href="troubleshooting.html" class="btn btn-info" style="font-size: 0.9em;">
+            <i class="fas fa-question-circle"></i> Troubleshooting Guide
+          </a>
+        </div>
+        <div id="connectionStatus" class="status">Tidak terhubung</div>
+      </div>
 
-        <div class="connection-section">
-            <button id="connectBtn" class="btn btn-primary">
-                <i class="fas fa-bluetooth"></i> Hubungkan Printer
-            </button>
-            <div id="connectionStatus" class="status">Tidak terhubung</div>
+      <div class="print-section">
+        <div class="tabs">
+          <button class="tab-btn active" data-tab="text">Cetak Teks</button>
+          <button class="tab-btn" data-tab="receipt">Cetak Struk</button>
+          <button class="tab-btn" data-tab="test">Test Print</button>
         </div>
 
-        <div class="print-section">
-            <div class="tabs">
-                <button class="tab-btn active" data-tab="text">Cetak Teks</button>
-                <button class="tab-btn" data-tab="receipt">Cetak Struk</button>
-                <button class="tab-btn" data-tab="test">Test Print</button>
-            </div>
-
-            <!-- Tab Cetak Teks -->
-            <div id="text-tab" class="tab-content active">
-                <h3>Cetak Teks Sederhana</h3>
-                <div class="form-group">
-                    <label for="textToPrint">Teks yang akan dicetak:</label>
-                    <textarea id="textToPrint" rows="5" placeholder="Masukkan teks yang ingin dicetak...">Halo, ini adalah test print dari thermal printer Bluetooth!
+        <!-- Tab Cetak Teks -->
+        <div id="text-tab" class="tab-content active">
+          <h3>Cetak Teks Sederhana</h3>
+          <div class="form-group">
+            <label for="textToPrint">Teks yang akan dicetak:</label>
+            <textarea
+              id="textToPrint"
+              rows="5"
+              placeholder="Masukkan teks yang ingin dicetak..."
+            >
+Halo, ini adalah test print dari thermal printer Bluetooth!
 
 Printer: EPSON EP5821
 Lebar: 58mm
 ESC/POS Command
 
-Terima kasih!</textarea>
-                </div>
-                <div class="form-row">
-                    <div class="form-group">
-                        <label for="textAlign">Perataan:</label>
-                        <select id="textAlign">
-                            <option value="left">Kiri</option>
-                            <option value="center">Tengah</option>
-                            <option value="right">Kanan</option>
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <label for="textSize">Ukuran:</label>
-                        <select id="textSize">
-                            <option value="normal">Normal</option>
-                            <option value="double">Double</option>
-                            <option value="wide">Lebar</option>
-                            <option value="tall">Tinggi</option>
-                        </select>
-                    </div>
-                </div>
-                <button id="printTextBtn" class="btn btn-success">
-                    <i class="fas fa-print"></i> Cetak Teks
-                </button>
+Terima kasih!</textarea
+            >
+          </div>
+          <div class="form-row">
+            <div class="form-group">
+              <label for="textAlign">Perataan:</label>
+              <select id="textAlign">
+                <option value="left">Kiri</option>
+                <option value="center">Tengah</option>
+                <option value="right">Kanan</option>
+              </select>
             </div>
-
-            <!-- Tab Cetak Struk -->
-            <div id="receipt-tab" class="tab-content">
-                <h3>Cetak Struk Belanja</h3>
-                <div class="form-group">
-                    <label for="storeName">Nama Toko:</label>
-                    <input type="text" id="storeName" value="TOKO SERBA ADA" placeholder="Nama toko">
-                </div>
-                <div class="form-group">
-                    <label for="storeAddress">Alamat:</label>
-                    <input type="text" id="storeAddress" value="Jl. Contoh No. 123, Jakarta" placeholder="Alamat toko">
-                </div>
-                <div class="form-group">
-                    <label for="cashier">Kasir:</label>
-                    <input type="text" id="cashier" value="Admin" placeholder="Nama kasir">
-                </div>
-                
-                <h4>Item Belanja</h4>
-                <div id="itemsList">
-                    <div class="item-row">
-                        <input type="text" class="item-name" placeholder="Nama item" value="Indomie Goreng">
-                        <input type="number" class="item-qty" placeholder="Qty" value="2" min="1">
-                        <input type="number" class="item-price" placeholder="Harga" value="3000" min="0">
-                        <button class="btn-remove"><i class="fas fa-trash"></i></button>
-                    </div>
-                    <div class="item-row">
-                        <input type="text" class="item-name" placeholder="Nama item" value="Teh Botol">
-                        <input type="number" class="item-qty" placeholder="Qty" value="1" min="1">
-                        <input type="number" class="item-price" placeholder="Harga" value="5000" min="0">
-                        <button class="btn-remove"><i class="fas fa-trash"></i></button>
-                    </div>
-                </div>
-                <button id="addItemBtn" class="btn btn-secondary">
-                    <i class="fas fa-plus"></i> Tambah Item
-                </button>
-                
-                <div class="form-row">
-                    <div class="form-group">
-                        <label for="paymentMethod">Metode Bayar:</label>
-                        <select id="paymentMethod">
-                            <option value="Tunai">Tunai</option>
-                            <option value="Kartu">Kartu</option>
-                            <option value="Transfer">Transfer</option>
-                            <option value="E-Wallet">E-Wallet</option>
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <label for="paymentAmount">Jumlah Bayar:</label>
-                        <input type="number" id="paymentAmount" placeholder="0" min="0">
-                    </div>
-                </div>
-                
-                <button id="printReceiptBtn" class="btn btn-success">
-                    <i class="fas fa-receipt"></i> Cetak Struk
-                </button>
+            <div class="form-group">
+              <label for="textSize">Ukuran:</label>
+              <select id="textSize">
+                <option value="normal">Normal</option>
+                <option value="double">Double</option>
+                <option value="wide">Lebar</option>
+                <option value="tall">Tinggi</option>
+              </select>
             </div>
-
-            <!-- Tab Test Print -->
-            <div id="test-tab" class="tab-content">
-                <h3>Test Print</h3>
-                <p>Test fungsi printer dengan berbagai format</p>
-                <div class="test-buttons">
-                    <button id="testBasicBtn" class="btn btn-info">Test Basic</button>
-                    <button id="testAlignBtn" class="btn btn-info">Test Alignment</button>
-                    <button id="testSizeBtn" class="btn btn-info">Test Size</button>
-                    <button id="testBarcodBtn" class="btn btn-info">Test Barcode</button>
-                    <button id="cutPaperBtn" class="btn btn-warning">Potong Kertas</button>
-                </div>
-            </div>
+          </div>
+          <button id="printTextBtn" class="btn btn-success">
+            <i class="fas fa-print"></i> Cetak Teks
+          </button>
         </div>
 
-        <div class="log-section">
-            <h3>Log Aktivitas</h3>
-            <div id="logArea"></div>
-            <button id="clearLogBtn" class="btn btn-secondary">Bersihkan Log</button>
+        <!-- Tab Cetak Struk -->
+        <div id="receipt-tab" class="tab-content">
+          <h3>Cetak Struk Belanja</h3>
+          <div class="form-group">
+            <label for="storeName">Nama Toko:</label>
+            <input
+              type="text"
+              id="storeName"
+              value="TOKO SERBA ADA"
+              placeholder="Nama toko"
+            />
+          </div>
+          <div class="form-group">
+            <label for="storeAddress">Alamat:</label>
+            <input
+              type="text"
+              id="storeAddress"
+              value="Jl. Contoh No. 123, Jakarta"
+              placeholder="Alamat toko"
+            />
+          </div>
+          <div class="form-group">
+            <label for="cashier">Kasir:</label>
+            <input
+              type="text"
+              id="cashier"
+              value="Admin"
+              placeholder="Nama kasir"
+            />
+          </div>
+
+          <h4>Item Belanja</h4>
+          <div id="itemsList">
+            <div class="item-row">
+              <input
+                type="text"
+                class="item-name"
+                placeholder="Nama item"
+                value="Indomie Goreng"
+              />
+              <input
+                type="number"
+                class="item-qty"
+                placeholder="Qty"
+                value="2"
+                min="1"
+              />
+              <input
+                type="number"
+                class="item-price"
+                placeholder="Harga"
+                value="3000"
+                min="0"
+              />
+              <button class="btn-remove"><i class="fas fa-trash"></i></button>
+            </div>
+            <div class="item-row">
+              <input
+                type="text"
+                class="item-name"
+                placeholder="Nama item"
+                value="Teh Botol"
+              />
+              <input
+                type="number"
+                class="item-qty"
+                placeholder="Qty"
+                value="1"
+                min="1"
+              />
+              <input
+                type="number"
+                class="item-price"
+                placeholder="Harga"
+                value="5000"
+                min="0"
+              />
+              <button class="btn-remove"><i class="fas fa-trash"></i></button>
+            </div>
+          </div>
+          <button id="addItemBtn" class="btn btn-secondary">
+            <i class="fas fa-plus"></i> Tambah Item
+          </button>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label for="paymentMethod">Metode Bayar:</label>
+              <select id="paymentMethod">
+                <option value="Tunai">Tunai</option>
+                <option value="Kartu">Kartu</option>
+                <option value="Transfer">Transfer</option>
+                <option value="E-Wallet">E-Wallet</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="paymentAmount">Jumlah Bayar:</label>
+              <input type="number" id="paymentAmount" placeholder="0" min="0" />
+            </div>
+          </div>
+
+          <button id="printReceiptBtn" class="btn btn-success">
+            <i class="fas fa-receipt"></i> Cetak Struk
+          </button>
         </div>
+
+        <!-- Tab Test Print -->
+        <div id="test-tab" class="tab-content">
+          <h3>Test Print</h3>
+          <p>Test fungsi printer dengan berbagai format</p>
+          <div class="test-buttons">
+            <button id="testBasicBtn" class="btn btn-info">Test Basic</button>
+            <button id="testAlignBtn" class="btn btn-info">
+              Test Alignment
+            </button>
+            <button id="testSizeBtn" class="btn btn-info">Test Size</button>
+            <button id="testBarcodBtn" class="btn btn-info">
+              Test Barcode
+            </button>
+            <button id="cutPaperBtn" class="btn btn-warning">
+              Potong Kertas
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <div class="log-section">
+        <h3>Log Aktivitas</h3>
+        <div id="logArea"></div>
+        <button id="clearLogBtn" class="btn btn-secondary">
+          Bersihkan Log
+        </button>
+      </div>
     </div>
 
     <script src="escpos-commands.js"></script>
     <script src="bluetooth-printer.js"></script>
     <script src="app.js"></script>
-</body>
+  </body>
 </html>

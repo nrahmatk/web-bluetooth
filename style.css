@@ -43,6 +43,10 @@ header p {
   border-bottom: 1px solid #eee;
 }
 
+.connection-section .btn {
+  margin: 5px;
+}
+
 .status {
   margin-top: 15px;
   padding: 10px 20px;

@@ -27,7 +27,6 @@ class BluetoothPrinter {
     this.onError = null;
     this.onLog = null;
   }
-
   /**
    * Check if Web Bluetooth is supported
    */
@@ -36,6 +35,13 @@ class BluetoothPrinter {
       this.log("Web Bluetooth API tidak didukung di browser ini", "error");
       return false;
     }
+    
+    // Check HTTPS requirement
+    if (location.protocol !== 'https:' && location.hostname !== 'localhost') {
+      this.log("Web Bluetooth membutuhkan HTTPS atau localhost", "error");
+      return false;
+    }
+    
     return true;
   }
 
@@ -52,7 +58,6 @@ class BluetoothPrinter {
       this.onLog(logMessage, type);
     }
   }
-
   /**
    * Connect to printer
    */
@@ -64,22 +69,43 @@ class BluetoothPrinter {
 
       this.log("Mencari perangkat Bluetooth...");
 
-      // Request device dengan filter untuk printer
-      const options = {
+      // Coba dengan filter spesifik terlebih dahulu
+      let options = {
         filters: [
+          { namePrefix: "RPP" }, // RPP series printers (termasuk RPP02)
           { namePrefix: "EP5821" }, // EPSON EP5821
           { namePrefix: "EPSON" }, // EPSON devices
           { namePrefix: "POS" }, // POS printers
           { namePrefix: "Thermal" }, // Thermal printers
           { namePrefix: "Printer" }, // Generic printers
           { namePrefix: "BT" }, // Bluetooth devices
+          { namePrefix: "RP" }, // RP series printers
+          { namePrefix: "MTP" }, // Mobile thermal printers
+          { namePrefix: "58mm" }, // 58mm printers
+          { namePrefix: "TM" }, // TM series (EPSON)
+          { namePrefix: "RT" }, // Receipt thermal
+          { namePrefix: "ZJ" }, // ZJ series printers
+          { namePrefix: "Mini" }, // Mini printers
+          { namePrefix: "Portable" }, // Portable printers
         ],
         optionalServices: this.alternativeServiceUUIDs,
       };
 
-      this.device = await navigator.bluetooth.requestDevice(options);
+      try {
+        this.device = await navigator.bluetooth.requestDevice(options);
+      } catch (filterError) {
+        this.log("Filter spesifik gagal, mencoba scan semua perangkat...");
+        
+        // Fallback: scan semua perangkat yang mengiklankan service
+        options = {
+          acceptAllDevices: true,
+          optionalServices: this.alternativeServiceUUIDs,
+        };
+        
+        this.device = await navigator.bluetooth.requestDevice(options);
+      }
 
-      this.log(`Perangkat ditemukan: ${this.device.name || "Unknown"}`);
+      this.log(`Perangkat ditemukan: ${this.device.name || "Unknown"} (ID: ${this.device.id})`);
 
       // Add disconnect event listener
       this.device.addEventListener("gattserverdisconnected", () => {
@@ -301,6 +327,115 @@ class BluetoothPrinter {
       }
     } else {
       return await this.connect();
+    }
+  }
+
+  /**
+   * Get system and browser information for debugging
+   */
+  getSystemInfo() {
+    const info = {
+      userAgent: navigator.userAgent,
+      protocol: location.protocol,
+      hostname: location.hostname,
+      bluetoothSupported: !!navigator.bluetooth,
+      isSecureContext: window.isSecureContext,
+      platform: navigator.platform || 'Unknown'
+    };
+    
+    this.log(`System Info: ${JSON.stringify(info, null, 2)}`);
+    return info;
+  }
+
+  /**
+   * Advanced connect method with more debugging
+   */
+  async connectWithDebug() {
+    try {
+      // Log system information
+      this.getSystemInfo();
+      
+      if (!this.isBluetoothSupported()) {
+        throw new Error("Web Bluetooth tidak didukung atau tidak aman");
+      }
+
+      this.log("Mencari perangkat Bluetooth (dengan debug)...");
+
+      // Coba dengan filter spesifik untuk RPP02
+      let options = {
+        filters: [
+          { namePrefix: "RPP02" }, // Spesifik untuk RPP02
+          { namePrefix: "RPP" }, // RPP series printers
+          { name: "RPP02" }, // Exact name match
+        ],
+        optionalServices: this.alternativeServiceUUIDs,
+      };
+
+      try {
+        this.log("Mencoba filter spesifik untuk RPP02...");
+        this.device = await navigator.bluetooth.requestDevice(options);
+      } catch (filterError) {
+        this.log(`Filter RPP02 gagal: ${filterError.message}`);
+        this.log("Mencoba filter umum untuk printer...");
+        
+        // Fallback ke filter umum
+        options = {
+          filters: [
+            { namePrefix: "RPP" },
+            { namePrefix: "POS" },
+            { namePrefix: "Thermal" },
+            { namePrefix: "Printer" },
+            { namePrefix: "BT" },
+          ],
+          optionalServices: this.alternativeServiceUUIDs,
+        };
+        
+        try {
+          this.device = await navigator.bluetooth.requestDevice(options);
+        } catch (generalError) {
+          this.log(`Filter umum gagal: ${generalError.message}`);
+          this.log("Mencoba scan semua perangkat...");
+          
+          // Last resort: scan all devices
+          options = {
+            acceptAllDevices: true,
+            optionalServices: this.alternativeServiceUUIDs,
+          };
+          
+          this.device = await navigator.bluetooth.requestDevice(options);
+        }
+      }
+
+      this.log(`Perangkat ditemukan: ${this.device.name || "Unknown"} (ID: ${this.device.id})`);
+
+      // Add disconnect event listener
+      this.device.addEventListener("gattserverdisconnected", () => {
+        this.handleDisconnection();
+      });
+
+      // Connect to GATT server
+      this.log("Menghubungkan ke GATT server...");
+      this.server = await this.device.gatt.connect();
+
+      // Try to find the correct service
+      await this.findAndConnectService();
+
+      this.isConnected = true;
+      this.log("Berhasil terhubung ke printer!", "success");
+
+      if (this.onConnectionChange) {
+        this.onConnectionChange(true);
+      }
+
+      return true;
+    } catch (error) {
+      this.log(`Error koneksi: ${error.message}`, "error");
+
+      if (this.onError) {
+        this.onError(error);
+      }
+
+      return false;
     }
   }
 }
