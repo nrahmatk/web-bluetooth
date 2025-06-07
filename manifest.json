@@ -1,0 +1,71 @@
+{
+  "name": "Thermal Printer Bluetooth",
+  "short_name": "TPrinter",
+  "description": "Web app untuk mencetak ke thermal printer Bluetooth EPSON EP5821 dengan ESC/POS commands",
+  "version": "1.0.0",
+  "start_url": "./index.html",
+  "display": "standalone",
+  "background_color": "#667eea",
+  "theme_color": "#667eea",
+  "orientation": "portrait-primary",
+  "scope": "./",
+  "lang": "id-ID",
+  "dir": "ltr",
+  "categories": ["business", "productivity", "utilities"],
+  "icons": [
+    {
+      "src": "data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTkyIiBoZWlnaHQ9IjE5MiIgdmlld0JveD0iMCAwIDE5MiAxOTIiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjxyZWN0IHdpZHRoPSIxOTIiIGhlaWdodD0iMTkyIiByeD0iMjQiIGZpbGw9IiM2NjdlZWEiLz4KPHBhdGggZD0iTTQ4IDY0aDk2djE2SDQ4VjY0em0wIDI0aDk2djE2SDQ4Vjg4em0wIDI0aDY0djE2SDQ4di0xNnoiIGZpbGw9IndoaXRlIi8+CjxwYXRoIGQ9Ik0xNDQgMTI4SDE0NFYxNDRIMTYwVjEyOEgxNDR6TTQ4IDE0NEg5NlYxNjBINDhWMTQ0eiIgZmlsbD0id2hpdGUiLz4KPHN2Zz4K",
+      "sizes": "192x192",
+      "type": "image/svg+xml"
+    },
+    {
+      "src": "data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNTEyIiBoZWlnaHQ9IjUxMiIgdmlld0JveD0iMCAwIDUxMiA1MTIiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjxyZWN0IHdpZHRoPSI1MTIiIGhlaWdodD0iNTEyIiByeD0iNjQiIGZpbGw9IiM2NjdlZWEiLz4KPHBhdGggZD0iTTEyOCAxNzJoMjU2djQySDEyOFYxNzJ6bTAgNjRoMjU2djQySDEyOFYyMzZ6bTAgNjRoMTcwdjQySDEyOHYtNDJ6IiBmaWxsPSJ3aGl0ZSIvPgo8cGF0aCBkPSJNMzg0IDM0NEgzODRWMzg2SDQyNlYzNDRIMzg0ek0xMjggMzg2SDI1NlY0MjhIMTI4VjM4NnoiIGZpbGw9IndoaXRlIi8+Cjwvc3ZnPgo=",
+      "sizes": "512x512",
+      "type": "image/svg+xml"
+    }
+  ],
+  "screenshots": [
+    {
+      "src": "data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMzIwIiBoZWlnaHQ9IjU2OCIgdmlld0JveD0iMCAwIDMyMCA1NjgiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjxyZWN0IHdpZHRoPSIzMjAiIGhlaWdodD0iNTY4IiByeD0iMTYiIGZpbGw9IndoaXRlIi8+CjxyZWN0IHg9IjAiIHk9IjAiIHdpZHRoPSIzMjAiIGhlaWdodD0iMTIwIiBmaWxsPSIjNjY3ZWVhIi8+Cjx0ZXh0IHg9IjE2MCIgeT0iNDAiIGZpbGw9IndoaXRlIiBmb250LWZhbWlseT0iQXJpYWwiIGZvbnQtc2l6ZT0iMjAiIHRleHQtYW5jaG9yPSJtaWRkbGUiPkJsdWV0b290aCBQcmludGVyPC90ZXh0Pgo8dGV4dCB4PSIxNjAiIHk9IjcwIiBmaWxsPSJ3aGl0ZSIgZm9udC1mYW1pbHk9IkFyaWFsIiBmb250LXNpemU9IjE0IiB0ZXh0LWFuY2hvcj0ibWlkZGxlIj5FUFNPTIBFUEA1ODIxIC0gNThtbTwvdGV4dD4KPC9zdmc+Cg==",
+      "sizes": "320x568",
+      "type": "image/svg+xml",
+      "form_factor": "narrow"
+    }
+  ],
+  "prefer_related_applications": false,
+  "edge_side_panel": {
+    "preferred_width": 400
+  },
+  "protocols": [
+    {
+      "protocol": "bluetooth",
+      "url": "./index.html?protocol=%s"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "Cetak Teks",
+      "short_name": "Text",
+      "description": "Cetak teks sederhana",
+      "url": "./index.html#text",
+      "icons": [
+        {
+          "src": "data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iOTYiIGhlaWdodD0iOTYiIHZpZXdCb3g9IjAgMCA5NiA5NiIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHJlY3Qgd2lkdGg9Ijk2IiBoZWlnaHQ9Ijk2IiByeD0iMTIiIGZpbGw9IiM2NjdlZWEiLz4KPHBhdGggZD0iTTI0IDMyaDQ4djhIMjRWMzJ6bTAgMTZoNDh2OEgyNFY0OHptMCAxNmgzMnY4SDI0di04eiIgZmlsbD0id2hpdGUiLz4KPC9zdmc+Cg==",
+          "sizes": "96x96"
+        }
+      ]
+    },
+    {
+      "name": "Cetak Struk",
+      "short_name": "Receipt",
+      "description": "Cetak struk belanja",
+      "url": "./index.html#receipt",
+      "icons": [
+        {
+          "src": "data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iOTYiIGhlaWdodD0iOTYiIHZpZXdCb3g9IjAgMCA5NiA5NiIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHJlY3Qgd2lkdGg9Ijk2IiBoZWlnaHQ9Ijk2IiByeD0iMTIiIGZpbGw9IiM2NjdlZWEiLz4KPHBhdGggZD0iTTI0IDI0aDQ4djhIMjRWMjR6bTAgMTJoNDB2NEgyNFYzNnptMCAxMmg0OHY0SDI0VjQ4em0wIDEyaDMydjRIMjRWNjB6IiBmaWxsPSJ3aGl0ZSIvPgo8L3N2Zz4K",
+          "sizes": "96x96"
+        }
+      ]
+    }
+  ]
+}
